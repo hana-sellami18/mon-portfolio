@@ -1,86 +1,116 @@
-import './App.css';
+// src/App.jsx
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
+import Certificates from './components/Accueil/Certificates';
 
-// Layouts
-import Layout from './Pages/Layout';
-import AdminLayout from './components/Admin/AdminLayout.jsx';
+/* ── Lazy loading ── */
+const Layout       = lazy(() => import('./Pages/Layout'));
+const AdminLayout  = lazy(() => import('./components/Admin/AdminLayout'));
 
-// Composants Publics
-import Hero from './components/Accueil/Hero';
-import About from './components/Accueil/About';
-import Experience from './components/Accueil/Experience';
-import ContactForm from './components/Formulaire/FormulaireG6';
+// Public
+const Hero        = lazy(() => import('./components/Accueil/Hero'));
+const About       = lazy(() => import('./components/Accueil/About'));
+const Experience  = lazy(() => import('./components/Accueil/Experience'));
+const ContactForm = lazy(() => import('./components/Formulaire/FormulaireG6'));
 
-// Composants Admin
-import AdminDashboard from './components/Admin/Dashboard';
-import AdminUsers from './components/Admin/Users';
-import AdminAnalytics from './components/Admin/Statistics';
-import AdminSettings from './components/Admin/Settings';
+// Admin
+const Dashboard     = lazy(() => import('./components/Admin/Dashboard'));
+const Users         = lazy(() => import('./components/Admin/Users'));
+const Statistics    = lazy(() => import('./components/Admin/Statistics'));
+const Settings      = lazy(() => import('./components/Admin/Settings'));
+const FormSubs      = lazy(() => import('./components/Admin/AdminFormSubmissions'));
+const ProjectsAdmin = lazy(() => import('./components/Admin/ProjectsAdminPage'));
 
 // Auth
-import ProtectedRoute from './components/Admin/ProtectedRoute';
-import Logout from './components/Auth/Logout.jsx';
-// Correct
-import Login from './components/Auth/login.jsx';
-import AdminFormSubmissions from './components/Admin/AdminFormSubmissions.jsx';
+const Login  = lazy(() => import('./components/Auth/Login'));
+const Logout = lazy(() => import('./components/Auth/Logout'));
 
-// 404
-function NotFound() {
+import ProtectedRoute from './components/Admin/ProtectedRoute';
+
+/* ── Loader ── */
+function Loader() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="text-center">
-        <h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-8">Page non trouvée</p>
-        <a href="/" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
-          Retour à l'accueil
-        </a>
-      </div>
+    <div style={{
+      minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center',
+      background:'var(--cream)', fontFamily:'var(--mono)', fontSize:'.72rem',
+      letterSpacing:'.12em', textTransform:'uppercase', color:'var(--muted)',
+    }}>
+      Chargement…
     </div>
   );
 }
 
-function App() {
-  const token = localStorage.getItem('authToken');
-  const isAuthenticated = Boolean(token);
-
+/* ── 404 ── */
+function NotFound() {
   return (
-    <Routes>
-      {/* Routes publiques */}
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Hero />} />
-        <Route path="about" element={<About />} />
-        <Route path="experience" element={<Experience />} />
-        <Route path="contact" element={<ContactForm />} />
-        <Route
-          path="login"
-          element={
-            isAuthenticated ? <Navigate to="/admin" replace /> : <Login />
-          }
-        />
-      </Route>
-
-      {/* Routes admin protégées */}
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute isAllowed={isAuthenticated} redirectPath="/login">
-            <AdminLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<AdminDashboard />} />
-        <Route path="users" element={<AdminUsers />} />
-        <Route path="analytics" element={<AdminAnalytics />} />
-        <Route path="settings" element={<AdminSettings />} />
-        <Route path="forms" element={<AdminFormSubmissions />} />
-      </Route>
-
-
-      <Route path="/logout" element={<Logout />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <div style={{
+      minHeight:'100vh', display:'flex', flexDirection:'column',
+      alignItems:'center', justifyContent:'center',
+      background:'var(--cream)', gap:'2rem',
+    }}>
+      <span style={{ fontFamily:'var(--serif)', fontSize:'6rem', color:'var(--border)', lineHeight:1 }}>
+        404
+      </span>
+      <p style={{ fontFamily:'var(--mono)', fontSize:'.7rem', letterSpacing:'.14em', textTransform:'uppercase', color:'var(--muted)' }}>
+        Page introuvable
+      </p>
+      <a href="/" style={{
+        fontFamily:'var(--mono)', fontSize:'.65rem', letterSpacing:'.12em', textTransform:'uppercase',
+        padding:'.9rem 2.2rem', background:'var(--ink)', color:'var(--cream)', textDecoration:'none',
+      }}>
+        ← Retour à l'accueil
+      </a>
+    </div>
   );
-  <Route path="forms" element={<AdminFormSubmissions />} />
 }
 
-export default App;
+export default function App() {
+  const { isAuthenticated } = useAuth();
+
+  return (
+    <Suspense fallback={<Loader />}>
+      <Routes>
+
+        {/* ── PUBLIC ── */}
+        <Route path="/" element={<Layout />}>
+          <Route index element={
+            <>
+              <Hero />
+              <About />
+              <Experience />
+              <Certificates />
+              <ContactForm />
+            </>
+          } />
+          <Route path="contact" element={<ContactForm />} />
+          <Route
+            path="login"
+            element={isAuthenticated ? <Navigate to="/admin" replace /> : <Login />}
+          />
+        </Route>
+
+        {/* ── ADMIN ── */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute isAllowed={isAuthenticated} redirectPath="/login">
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index            element={<Dashboard />} />
+          <Route path="users"     element={<Users />} />
+          <Route path="analytics" element={<Statistics />} />
+          <Route path="projects"  element={<ProjectsAdmin />} />
+          <Route path="forms"     element={<FormSubs />} />
+          <Route path="settings"  element={<Settings />} />
+        </Route>
+
+        <Route path="/logout" element={<Logout />} />
+        <Route path="*"       element={<NotFound />} />
+
+      </Routes>
+    </Suspense>
+  );
+}

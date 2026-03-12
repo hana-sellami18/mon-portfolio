@@ -1,54 +1,42 @@
-// tailwind.config.cjs
-module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}"
-  ],
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        darkBg: {
-          DEFAULT: '#11121C',     // Nouveau fond principal : sombre élégant avec teinte violet-bleuté très douce (plus moderne que noir pur)
-          lighter: '#1A1B2A',     // Pour variations légères (ex: hover ou sections alternées)
+        primary: {
+          DEFAULT: '#C9748A',
+          light: '#E8A0B0',
+          pale: '#F5D6DE',
+          deep: '#A85570',
+          accent: '#F0C0CC',
         },
-        glass: {
-          DEFAULT: 'rgba(30, 30, 50, 0.35)', // Glass frosté inchangé
-          border: 'rgba(255, 255, 255, 0.08)',
+        bg: {
+          DEFAULT: '#FFFFFF',
+          soft: '#FDF6F8',
         },
-        accentPink: {
-          DEFAULT: '#FFB6D9',     // Rose pastel lumineux
-          light: '#FFD6E8',
-          glow: 'rgba(255, 182, 217, 0.3)',
-          hover: 'rgba(255, 182, 217, 0.6)',
+        text: {
+          DEFAULT: '#2C1A22',
+          muted: '#8A6470',
+          soft: '#B8909A',
         },
-        accentPurple: {
-          DEFAULT: '#D8B4FF',     // Violet dreamy
-          dark: '#B594E0',
+        border: {
+          DEFAULT: '#EDD5DC',
+          soft: '#F5E8EC',
         },
-        textPrimary: '#FFFFFF',
-        textSecondary: '#D0D8F0',
-        highlight: '#FFB6D9',
       },
       fontFamily: {
-        display: ['Poppins', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
-      },
-      backdropBlur: {
-        md: '16px',
-        lg: '20px',
-      },
-      boxShadow: {
-        'glass': '0 16px 48px rgba(0, 0, 0, 0.5)',
-        'card': '0 16px 48px rgba(0, 0, 0, 0.45), inset 0 0 30px rgba(255, 182, 217, 0.1)',
-        'hover': '0 24px 64px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(255, 182, 217, 0.2)',
-        'avatar': '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 182, 217, 0.3)',
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        body: ['"DM Sans"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       borderRadius: {
-        '2xl': '32px',
-        '3xl': '40px',
-        'full-rounded': '9999px',
+        sm: '8px',
+        md: '16px',
+        lg: '24px',
+        full: '9999px',
       },
     },
   },
   plugins: [],
-}
+};

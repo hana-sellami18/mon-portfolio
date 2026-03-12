@@ -1,99 +1,73 @@
-// src/components/Accueil/Hero.jsx
-import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import hanaPhoto from "../../assets/hana.png"; // Vérifie que ce chemin est correct
+import { useEffect, useRef } from 'react';
+import './Hero.css';
+import hana from '../../assets/hana.png';
 
-const Hero = () => {
-  const { scrollY } = useScroll();
-  const yText = useTransform(scrollY, [0, 500], [0, -80]);
-  const yImage = useTransform(scrollY, [0, 500], [0, 100]);
-  const opacityGlow = useTransform(scrollY, [0, 400], [0.6, 0]);
-
-  return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-darkBg"
-    >
-      {/* Glows pastel doux */}
-      <motion.div
-        style={{ opacity: opacityGlow }}
-        className="absolute top-10 left-10 w-96 h-96 bg-pink-300/30 blur-[140px] rounded-full"
-      />
-      <motion.div
-        style={{ opacity: opacityGlow }}
-        className="absolute bottom-0 right-0 w-80 h-80 bg-purple-300/25 blur-[160px] rounded-full"
-      />
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-300/10 via-transparent to-pink-300/10 pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center z-10">
-
-        {/* LEFT TEXT */}
-        <motion.div
-          style={{ y: yText }}
-          initial={{ opacity: 0, x: -60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight text-textPrimary">
-            Bonjour, je suis <br />
-            <span className="text-pink-300">Hana Sellami</span>
-          </h1>
-
-          <p className="mt-8 text-xl md:text-2xl text-textSecondary max-w-lg leading-relaxed">
-            Étudiante en génie logiciel, passionnée par le développement web,
-            l’IA, les interfaces modernes et l’expérience utilisateur.
-          </p>
-
-          {/* Buttons */}
-          <div className="flex flex-wrap gap-6 mt-12">
-            <a href="/Cv.pdf" download="CV_Hana_Sellami.pdf">
-              <button className="px-8 py-4 rounded-full bg-pink-300/50 backdrop-blur-md text-gray-900 font-semibold text-lg border border-pink-300/70 shadow-lg hover:bg-pink-300/70 hover:shadow-xl hover:scale-105 transition-all">
-                Télécharger CV 📄
-              </button>
-            </a>
-
-            <a href="https://www.linkedin.com/in/hanasellami" target="_blank" rel="noopener noreferrer">
-              <button className="px-8 py-4 rounded-full bg-purple-300/40 backdrop-blur-md text-gray-900 font-semibold text-lg border border-purple-300/60 shadow-lg hover:bg-purple-300/60 hover:shadow-xl hover:scale-105 transition-all">
-                LinkedIn ↗
-              </button>
-            </a>
-          </div>
-        </motion.div>
-
-        {/* RIGHT IMAGE */}
-        <motion.div
-          style={{ y: yImage }}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="flex justify-center"
-        >
-          <motion.img
-            src={hanaPhoto}
-            alt="Hana Sellami"
-            className="w-80 h-80 md:w-96 md:h-96 rounded-3xl object-cover shadow-2xl border-4 border-pink-300/60"
-            whileHover={{
-              scale: 1.06,
-              rotate: 2,
-              boxShadow: "0 30px 80px rgba(232, 180, 208, 0.4)",
-            }}
-            transition={{ duration: 0.5 }}
-          />
-        </motion.div>
-      </div>
-
-      {/* Petite flèche vers le bas */}
-      <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-textSecondary"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 1.5 }}
-      >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </motion.div>
-    </section>
-  );
+const scrollTo = (anchor) => {
+  const el = document.querySelector(anchor);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
 };
 
-export default Hero;
+export default function Hero() {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    setTimeout(() => el.classList.add('hero--visible'), 100);
+  }, []);
+
+  return (
+    <section className="hero" id="hero" ref={heroRef}>
+      <div className="hero__blob hero__blob--1" />
+      <div className="hero__blob hero__blob--2" />
+
+      <div className="container hero__inner">
+        <div className="hero__text">
+          <span className="hero__badge">En cours de stage 🌸</span>
+          <h1 className="hero__title">
+            Hana<br />
+            <span>Sellami</span>
+          </h1>
+          <p className="hero__role">Développeuse Full Stack & Passionnée IA</p>
+          <p className="hero__desc">
+            Étudiante en licence Génie Logiciel & Systèmes d'Information à l'Institut
+            International de Technologie de Sfax, classée parmi les majors de ma promotion.
+            Rigoureuse et motivée, je conçois des applications web et mobiles modernes
+            avec une curiosité profonde pour l'intelligence artificielle.
+          </p>
+          <div className="hero__actions">
+            <a href="#contact" className="btn btn--primary"
+               onClick={e => { e.preventDefault(); scrollTo('#contact'); }}>
+              Me contacter
+            </a>
+            <a href="#projects" className="btn btn--outline"
+               onClick={e => { e.preventDefault(); scrollTo('#projects'); }}>
+              Voir mes projets
+            </a>
+          </div>
+          <div className="hero__socials">
+            <a href="mailto:hanasellami18@gmail.com" title="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/hana-sellami-42459135b/" target="_blank" rel="noreferrer" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/hana-sellami18" target="_blank" rel="noreferrer" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div className="hero__photo-wrap">
+          <div className="hero__photo-ring" />
+          <img src={hana} alt="Hana Sellami" className="hero__photo" />
+        </div>
+      </div>
+
+      <div className="hero__scroll">
+        <span>Défiler</span>
+        <div className="hero__scroll-line" />
+      </div>
+    </section>
+  );
+}

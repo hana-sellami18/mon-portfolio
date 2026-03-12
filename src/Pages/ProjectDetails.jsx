@@ -1,128 +1,82 @@
-// src/pages/ProjectDetails.jsx
-import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-const API_URL = 'http://localhost:4000/projects';
-function ProjectDetails() {
-const { id } = useParams();
-const navigate = useNavigate();
-const [project, setProject] = useState(null);
-const [loading, setLoading] = useState(false);
-const [error, setError] = useState(null);
-useEffect(() => {
-async function load() {
-try {
-setLoading(true);
-setError(null);
-const res = await fetch(`${API_URL}/${id}`);
-if (res.status === 404) {
-setError('Projet introuvable');
-return;
-}
-if (!res.ok) throw new Error('Erreur lors du chargement du projet');
-const data = await res.json();
-setProject(data);
-} catch (err) {
-setError(err.message);
-} finally {
-setLoading(false);
-}
-}
-load();
-}, [id]);
-if (loading) {
-return <p className="text-center py-10">Chargement...</p>;
-}
-if (error) {
-return (
-<div className="max-w-3xl mx-auto px-4 py-12 text-center">
-<p className="text-red-600 mb-4">{error}</p>
-<button
-onClick={() => navigate('/projects')}
-className="inline-flex items-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium
-text-white hover:bg-gray-800"
->
-← Retour aux projets
-</button>
-</div>
-);
-}
-if (!project) return null;
-return (
-<section className="max-w-4xl mx-auto px-4 py-12">
-<Link
-to="/projects"
-className="text-sm text-gray-500 hover:text-gray-700"
->
-← Retour à la liste
-</Link>
-<div className="mt-6 bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
-<div className="h-40 bg-gradient-to-r from-indigo-500 to-purple-600" />
-<div className="p-6 md:p-8 space-y-6">
-<header>
-<h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-{project.title}
-</h1>
-{project.status && (
-<span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium
-text-gray-700 capitalize">
-Statut : {project.status}
-</span>
-)}
-</header>
-{project.description && (
-<p className="text-sm md:text-base text-gray-700 leading-relaxed">
-{project.description}
-</p>
-)}
-{project.techStack && project.techStack.length > 0 && (
-<div>
-<h2 className="text-sm font-semibold text-gray-900 mb-2">
-Technologies utilisées
-</h2>
-<div className="flex flex-wrap gap-2">
-{project.techStack.map((tech) => (
-<span
-key={tech}
+import { useParams, Link } from 'react-router-dom';
+import { PROJECTS_DATA } from '../data/projectsData';
+import './ProjectDetails.css';
 
-className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-
-indigo-700"
-
->
-{tech}
-</span>
-))}
-</div>
-</div>
-)}
-<div className="flex flex-wrap items-center gap-3">
-{project.githubUrl && (
-<a
-href={project.githubUrl}
-target="_blank"
-rel="noreferrer"
-className="inline-flex items-center rounded-md bg-gray-900 px-4 py-2 text-sm
-font-medium text-white hover:bg-gray-800"
->
-Voir le code
-</a>
-)}
-{project.liveUrl && (
-<a
-href={project.liveUrl}
-target="_blank"
-rel="noreferrer"
-
-className="inline-flex items-center rounded-md border border-gray-300 px-4 py-
-2 text-sm font-medium text-gray-800 hover:bg-gray-50"
-
->
-Voir le site
-</a>
-)}
-</div>
-</div>
-</div>
-</section>
-);
+function GitHubIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/>
+    </svg>
+  );
 }
-export default ProjectDetails;
+
+export default function ProjectDetails() {
+  const { id } = useParams();
+  const project = PROJECTS_DATA.find(p => p.id === Number(id));
+
+  if (!project) return (
+    <div className="pd-notfound container">
+      <h2>Projet non trouvé</h2>
+      <Link to="/projects">← Retour aux projets</Link>
+    </div>
+  );
+
+  return (
+    <main className="pd-page">
+      <div className="container">
+        <Link to="/projects" className="pd-back">← Retour aux projets</Link>
+
+        <div className="pd-hero">
+          {project.emoji    && <div className="pd-emoji">{project.emoji}</div>}
+          {project.category && <span className="pd-category">{project.category}</span>}
+          <h1>{project.title}</h1>
+          <p>{project.description}</p>
+
+          <div className="pd-actions">
+            {project.demo ? (
+              <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                 className="pd-btn pd-btn--demo">
+                🚀 Voir la démo
+              </a>
+            ) : (
+              <span className="pd-btn pd-btn--disabled">🚀 Démo non disponible</span>
+            )}
+
+            {project.github ? (
+              <a href={project.github} target="_blank" rel="noopener noreferrer"
+                 className="pd-btn pd-btn--github">
+                <GitHubIcon /> Voir le code
+              </a>
+            ) : (
+              <span className="pd-btn pd-btn--disabled">
+                <GitHubIcon /> Dépôt privé
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div className="pd-grid">
+          {project.features?.length > 0 && (
+            <div>
+              <h3>Fonctionnalités</h3>
+              <ul className="pd-features">
+                {project.features.map((f, i) => (
+                  <li key={i}><span className="pd-check">✓</span> {f}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {project.tags?.length > 0 && (
+            <div>
+              <h3>Technologies</h3>
+              <div className="pd-tech">
+                {project.tags.map(t => <span key={t}>{t}</span>)}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </main>
+  );
+}

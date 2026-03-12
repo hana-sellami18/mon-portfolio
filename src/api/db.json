@@ -2,37 +2,88 @@
   "projects": [
     {
       "id": 1,
-      "title": "21POS - Gestion de point de vente",
-      "description": "Application mobile et web pour la gestion des ventes et du stock.",
-      "techStack": ["React", "Node.js", "MySQL"],
-      "githubUrl": "https://github.com/ton-compte/21pos",
-      "liveUrl": "https://21pos.tn",
-      "status": "online"
+      "title": "Résumé automatique de documents IA",
+      "category": "IA & Web",
+      "emoji": "🤖",
+      "description": "Application web de résumé automatique de documents basée sur l'intelligence artificielle, avec modèles T5 et BART.",
+      "technologies": "Angular, Flask, Python, T5, BART, RAKE, TextRank",
+      "tech": ["Angular", "Flask", "Python", "T5", "BART"],
+      "github": "",
+      "demo": ""
     },
     {
       "id": 2,
-      "title": "Portfolio 3D Architecture",
-      "description": "Visualisation 3D de façades et d'intérieurs pour clients immobiliers.",
-      "techStack": ["React", "Three.js"],
-      "githubUrl": "https://github.com/ton-compte/archi-3d",
-      "liveUrl": null,
-      "status": "in-progress"
+      "title": "Lifestyle Aura",
+      "category": "Mobile",
+      "emoji": "🏃‍♀️",
+      "description": "Application mobile de bien-être : suivi fitness, nutrition, hydratation, sommeil et humeur avec recommandations personnalisées.",
+      "technologies": "Flutter, Hive, FL Chart, Image Picker, Camera",
+      "tech": ["Flutter", "Hive", "FL Chart"],
+      "github": "",
+      "demo": ""
+    },
+    {
+      "id": 3,
+      "title": "Architecture Microservices Restaurant",
+      "category": "Backend",
+      "emoji": "🍽️",
+      "description": "Système de gestion de restaurant basé sur une architecture microservices pour une meilleure modularité et scalabilité.",
+      "technologies": "Spring Boot, Eureka, API Gateway, Swagger, MySQL",
+      "tech": ["Spring Boot", "Eureka", "MySQL"],
+      "github": "",
+      "demo": ""
+    },
+    {
+      "id": 4,
+      "title": "Application CRUD .NET",
+      "category": "Web",
+      "emoji": "🗂️",
+      "description": "Application de gestion de données avec opérations CRUD complètes pour traiter et administrer les informations.",
+      "technologies": "C#, .NET, MySQL",
+      "tech": ["C#", ".NET", "MySQL"],
+      "github": "",
+      "demo": ""
+    },
+    {
+      "id": 5,
+      "title": "Jeux 2D & 3D Unity",
+      "category": "Game Dev",
+      "emoji": "🎮",
+      "description": "Mini-jeux interactifs en 2D et 3D avec mécaniques de gameplay, gestion des collisions et environnements immersifs.",
+      "technologies": "Unity, C#",
+      "tech": ["Unity", "C#"],
+      "github": "",
+      "demo": ""
+    },
+    {
+      "id": 6,
+      "title": "Animalerie en ligne",
+      "category": "Web",
+      "emoji": "🐾",
+      "description": "Site e-commerce responsive dédié à la vente de produits pour animaux avec système de commande en ligne.",
+      "technologies": "HTML, CSS, JavaScript",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "github": "",
+      "demo": ""
+    },
+    {
+      "id": 7,
+      "title": "Librairie en ligne",
+      "category": "Web",
+      "emoji": "📚",
+      "description": "Plateforme e-commerce dédiée à la présentation et gestion d'une collection de livres avec catalogue détaillé.",
+      "technologies": "HTML, CSS",
+      "tech": ["HTML", "CSS"],
+      "github": "",
+      "demo": ""
     }
   ],
   "users": [
     {
       "id": 1,
-      "email": "admin@21c-digital.com",
-      "password": "admin123",
-      "name": "Admin 21C",
+      "name": "Hana Sellami",
+      "email": "hanasellami18@gmail.com",
       "role": "admin"
-    },
-    {
-      "id": 2,
-      "email": "user@21c-digital.com",
-      "password": "user123",
-      "name": "User 21C",
-      "role": "user"
     }
   ],
   "formSubmissions": []

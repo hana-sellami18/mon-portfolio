@@ -1,25 +1,26 @@
-// src/api/projectsApi.js
-
 import axiosClient from './axiosClient';
 
-const RESOURCE = '/projects';
+export const getProjects = async () => {
+  const response = await axiosClient.get('/projects');
+  return response.data;
+};
 
-export async function getProjects() {
-  const res = await axiosClient.get(RESOURCE);
-  return res.data;
-}
+export const getProjectById = async (id) => {
+  const response = await axiosClient.get(`/projects/${id}`);
+  return response.data;
+};
 
-export async function createProject(project) {
-  const res = await axiosClient.post(RESOURCE, project);
-  return res.data;
-}
+export const createProject = async (data) => {
+  const response = await axiosClient.post('/projects', data);
+  return response.data;
+};
 
-export async function updateProject(id, project) {
-  const res = await axiosClient.put(`${RESOURCE}/${id}`, project);
-  return res.data;
-}
+export const updateProject = async (id, data) => {
+  const response = await axiosClient.put(`/projects/${id}`, data);
+  return response.data;
+};
 
-export async function deleteProject(id) {
-  await axiosClient.delete(`${RESOURCE}/${id}`);
-  return true;
-}
+export const deleteProject = async (id) => {
+  const response = await axiosClient.delete(`/projects/${id}`);
+  return response.data;
+};

@@ -1,25 +1,19 @@
-// src/api/formSubmissionsApi.js
+import axiosClient from './axiosClient';
 
-import axiosClient from './axiosClient';  // ← Correction ici !
+// Récupérer tous les messages du formulaire
+export const getFormSubmissions = async () => {
+  const response = await axiosClient.get('/formSubmissions');
+  return response.data;
+};
 
-const RESOURCE = '/formSubmissions';
+// Mettre à jour un message (ex: marquer comme lu)
+export const updateFormSubmission = async (id, data) => {
+  const response = await axiosClient.put(`/formSubmissions/${id}`, data);
+  return response.data;
+};
 
-export async function createFormSubmission(payload) {
-  const res = await axiosClient.post(RESOURCE, payload);
-  return res.data;
-}
-
-export async function getFormSubmissions() {
-  const res = await axiosClient.get(RESOURCE);
-  return res.data;
-}
-
-export async function updateFormSubmission(id, payload) {
-  const res = await axiosClient.put(`${RESOURCE}/${id}`, payload);
-  return res.data;
-}
-
-export async function deleteFormSubmission(id) {
-  await axiosClient.delete(`${RESOURCE}/${id}`);
-  return true;
-}
+// Supprimer un message
+export const deleteFormSubmission = async (id) => {
+  const response = await axiosClient.delete(`/formSubmissions/${id}`);
+  return response.data;
+};

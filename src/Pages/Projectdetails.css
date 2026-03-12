@@ -1,0 +1,182 @@
+.pd-page {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  min-height: 100vh;
+}
+
+.pd-notfound {
+  padding-top: 140px;
+  text-align: center;
+}
+
+.pd-back {
+  display: inline-block;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 40px;
+  transition: color var(--transition);
+}
+
+.pd-back:hover {
+  color: var(--color-primary);
+}
+
+.pd-hero {
+  margin-bottom: 48px;
+}
+
+.pd-emoji {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.pd-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--color-text);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.pd-hero p {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  max-width: 600px;
+}
+
+.pd-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+}
+
+.pd-grid h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
+
+.pd-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pd-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.pd-check {
+  color: var(--color-primary);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pd-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pd-tech span {
+  background: var(--color-primary-pale);
+  color: var(--color-primary-deep);
+  font-size: 0.84rem;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-accent);
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 700px) {
+  .pd-grid { grid-template-columns: 1fr; }
+}
+/* Numéro du projet (ex: "01") */
+.pd-num {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+  opacity: 0.6;
+}
+
+/* Badge catégorie */
+.pd-category {
+  display: inline-block;
+  margin: 0 0 12px 8px;
+  padding: 3px 12px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--color-primary-pale, rgba(99,102,241,0.12));
+  color: var(--color-primary, #6366f1);
+  border: 1px solid var(--color-accent, rgba(99,102,241,0.2));
+}
+
+/* Conteneur boutons hero */
+.pd-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+/* Base commune */
+.pd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.pd-btn:hover:not(.pd-btn--disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 🚀 Démo */
+.pd-btn--demo {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+}
+
+/* GitHub */
+.pd-btn--github {
+  background: #1a1a2e;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Désactivé */
+.pd-btn--disabled {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: transparent;
+  border: 2px dashed var(--color-border, #ccc);
+  color: var(--color-text-muted, #aaa);
+  cursor: not-allowed;
+  opacity: 0.55;
+  white-space: nowrap;
+}
