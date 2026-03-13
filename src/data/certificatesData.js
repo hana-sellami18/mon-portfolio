@@ -33,7 +33,7 @@ export const CERTIFICATS_DATA = [
     emoji: '🤖',
     category: 'Embarqué & IoT',
     description:
-      'Certificat de participation au workshop Arduino & IoT de l\'IEEE IIT SB, récompensant performance et présence.',
+      'Certificat de participation au workshop Arduino & IoT de l\'IEEE IIT SB.',
     skills: ['Arduino', 'IoT', 'Embedded Systems', 'IEEE'],
     credentialUrl: '',
     pdfFile: '/certificates/certif arduino.pdf',
@@ -46,9 +46,50 @@ export const CERTIFICATS_DATA = [
     emoji: '🐍',
     category: 'Programmation',
     description:
-      'Certificat de présence à la formation "Basic Python" et à la compétition CAMPY animée par Mme Najla Bouarada.',
+      'Certificat de présence à la formation "Basic Python" et à la compétition CAMPY.',
     skills: ['Python', 'Algorithmes', 'Compétition'],
     credentialUrl: '',
     pdfFile: '/certificates/certif python.pdf',
+  },
+
+  // ===== NOUVEAUX CERTIFICATS =====
+  {
+    id: 5,
+    title: 'Kickoff Session — Twintech AI Bootcamp',
+    issuer: 'Microsoft Tech Club ISIM Sfax — TwinTech Talks',
+    date: 'Oct 8, 2025',
+    emoji: '🚀',
+    category: 'Intelligence Artificielle',
+    description:
+      'Certificat de participation à la session Kickoff du Twintech AI Bootcamp, organisé par le Microsoft Tech Club ISIM Sfax.',
+    skills: ['AI', 'Machine Learning', 'Microsoft', 'Bootcamp'],
+    credentialUrl: '',
+    pdfFile: '/certificates/certif_kickoff.pdf',
+  },
+  {
+    id: 6,
+    title: 'Computer Vision Session — Twintech AI Bootcamp',
+    issuer: 'Microsoft Tech Club ISIM Sfax — TwinTech Talks',
+    date: 'Oct 22, 2025',
+    emoji: '👁️',
+    category: 'Intelligence Artificielle',
+    description:
+      'Certificat de participation à la session Computer Vision du Twintech AI Bootcamp — détection d\'objets, CNN et transfer learning.',
+    skills: ['Computer Vision', 'CNN', 'Deep Learning', 'Microsoft'],
+    credentialUrl: '',
+    pdfFile: '/certificates/certif_computer_vision.pdf',
+  },
+  {
+    id: 7,
+    title: 'Generative AI & LLMs Session — Twintech AI Bootcamp',
+    issuer: 'Microsoft Tech Club ISIM Sfax — TwinTech Talks',
+    date: 'Nov 27, 2025',
+    emoji: '🤖',
+    category: 'Intelligence Artificielle',
+    description:
+      'Certificat de participation à la session Generative AI & LLMs du Twintech AI Bootcamp — modèles de langage, prompt engineering et IA générative.',
+    skills: ['LLMs', 'Generative AI', 'Prompt Engineering', 'Microsoft'],
+    credentialUrl: '',
+    pdfFile: '/certificates/certif_llm.pdf',
   },
 ];
