@@ -1,3 +1,4 @@
+/* ===== SECTION ===== */
 .cert {
   background: var(--color-bg-soft);
 }
@@ -9,11 +10,12 @@
   margin-top: 8px;
 }
 
+/* ===== CARD ===== */
 .cert-card {
   background: #fff;
   border: 1px solid var(--color-border-soft);
   border-radius: var(--radius-lg);
-  padding: 28px;
+  padding: 0 0 20px 0;
   transition: all var(--transition);
   position: relative;
   overflow: hidden;
@@ -30,6 +32,7 @@
   background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
   opacity: 0;
   transition: opacity var(--transition);
+  z-index: 2;
 }
 
 .cert-card:hover {
@@ -42,8 +45,73 @@
   opacity: 1;
 }
 
+/* Contenu sous l'aperçu */
+.cert-card__emoji,
+.cert-card__cat,
+.cert-card__title,
+.cert-card__issuer,
+.cert-card__date,
+.cert-card__desc,
+.cert-card__tags,
+.cert-card__link {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* ===== APERÇU PDF MINIATURE ===== */
+.cert-card__preview {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  background: #f5f5f5;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.cert-card__iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none;
+  transform-origin: top left;
+}
+
+.cert-card__preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease;
+}
+
+.cert-card__preview-overlay span {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: all 0.25s ease;
+}
+
+.cert-card:hover .cert-card__preview-overlay {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.cert-card:hover .cert-card__preview-overlay span {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===== TEXTE ===== */
 .cert-card__emoji {
   font-size: 2rem;
+  padding-top: 4px;
 }
 
 .cert-card__cat {
@@ -98,15 +166,108 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  margin-top: 8px;
+  margin-top: 4px;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--color-primary);
   text-decoration: none;
   width: fit-content;
+  background: none;
+  border: none;
+  cursor: pointer;
   transition: opacity var(--transition);
+  font-family: inherit;
 }
 
 .cert-card__link:hover {
   opacity: 0.7;
+}
+
+/* ===== MODAL ===== */
+.cert-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.cert-modal__box {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.25s ease;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.cert-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border-soft);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+  gap: 12px;
+}
+
+.cert-modal__close {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+  line-height: 1;
+}
+
+.cert-modal__close:hover {
+  background: var(--color-bg-soft);
+}
+
+.cert-modal__iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+  min-height: 500px;
+}
+
+.cert-modal__download {
+  padding: 12px 20px;
+  border-top: 1px solid var(--color-border-soft);
+  margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .cert-modal__box {
+    max-height: 95vh;
+  }
+
+  .cert-modal__iframe {
+    min-height: 340px;
+  }
 }

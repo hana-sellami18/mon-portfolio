@@ -10,8 +10,8 @@ export default function Footer() {
         </div>
         <div className="footer__links">
           <a href="mailto:hanasellami18@gmail.com">hanasellami18@gmail.com</a>
-          <a href="https://linkedin.com/in/hana-sellami" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/hana-sellami-42459135b/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://github.com/hana-sellami18" target="_blank" rel="noreferrer">GitHub</a>
         </div>
         <p className="footer__copy">© {new Date().getFullYear()} Hana Sellami — Tous droits réservés</p>
       </div>
