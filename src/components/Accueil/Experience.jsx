@@ -44,7 +44,7 @@ const PROJECTS = [
     category: 'IA & Web',
     emoji: '🤖',
     demo: '',
-    github: 'https://github.com/hana-sellami18/pfa-project/tree/main/pfa-project-main',
+    github: 'https://github.com/hana-sellami18/pfa-project',
   },
   {
     id: 2,
