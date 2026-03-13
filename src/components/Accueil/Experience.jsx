@@ -96,6 +96,16 @@ const PROJECTS = [
     demo: '',
     github: '',
   },
+  {
+    id: 7,
+    title: 'Smart Agriculture — IA & IoT',
+    desc: 'Conception d\'un système agricole intelligent pour l\'optimisation de l\'irrigation. Module Computer Vision pour la détection du stress hydrique et des maladies foliaires par analyse d\'images (CNN / transfer learning). Intégration IoT pour la collecte temps réel des données capteurs (humidité sol, niveau des puits, débit d\'eau). Agrégation de données météorologiques via API externe pour générer des recommandations d\'irrigation et des alertes automatiques.',
+    tech: ['Python', 'CNN', 'Transfer Learning', 'IoT', 'Computer Vision', 'TensorFlow', 'API REST'],
+    category: 'IA & IoT',
+    emoji: '🌱',
+    demo: '',
+    github: '',
+  },
 ];
 
 function GitHubIcon() {
