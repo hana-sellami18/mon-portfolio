@@ -91,7 +91,11 @@ export default function Navbar() {
               Contact
             </a>
           </li>
-
+          <li>
+            <a href="/Hana_SELLAMI_CV.pdf" download className="navbar__cta">
+              Télécharger mon CV
+            </a>
+          </li>
         </ul>
 
         <button
