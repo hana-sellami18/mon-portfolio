@@ -92,7 +92,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="/Hana_SELLAMI_CV.pdf" download className="navbar__cta">
+            <a href="/Hana_SELLAMI_CV (3).pdf" download className="navbar__cta">
               Télécharger mon CV
             </a>
           </li>
